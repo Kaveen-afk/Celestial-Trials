@@ -6,3 +6,4 @@ Game functionality = playing tetris Endlessly if loss the game closes by itself
 did a audio introduction (might be Cringey)
 Used a Macbook to compile the code
 temprunner and test.py has nothing relevant in the code, they were tests to see if the code would work unfornately it didnt.
+To open the Game and Play run window.py
