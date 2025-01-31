@@ -34,12 +34,12 @@ pygame.mixer.init()
 
 # Load background sound for the start menu
 start_menu_sound = pygame.mixer.Sound("sounds/gameSM.mp3")
-start_menu_sound.set_volume(0.5)  # Set volume (0.0 to 1.0)
+start_menu_sound.set_volume(0.5)  
 
 # Play the sound on a loop when in the start menu
 if start_menu:
-    if not pygame.mixer.get_busy():  # Ensure the sound isn't already playing
-        start_menu_sound.play(-1)  # Loop indefinitely
+    if not pygame.mixer.get_busy(): 
+        start_menu_sound.play(-1)  
 
 
 # Load button images
@@ -179,8 +179,8 @@ def start_tetris():
     pygame.mixer.quit()
     pygame.quit()
 
-    # Run the Tetris game (ensure it's in the correct directory)
-    subprocess.run(['python3', 'Game/Tetrus.py'])  # Replace with the actual filename if different
+   
+    subprocess.run(['python3', 'Game/Tetrus.py'])  
 
     # After Tetris ends, reset the game state to level 1
     reset_game_state()
@@ -196,7 +196,6 @@ def display_exit_message():
     pygame.display.update()
     time.sleep(3)
 
-# Inside the game loop, where the player collides with the stairs_rect
 
 def reset_game_state():
     global player_x, player_y, in_level1, game_paused, start_menu
@@ -254,17 +253,17 @@ while True:
         if new_game_button.draw(screen) and not prologue_sound_played:
             start_menu = False
             in_level1 = True
-            start_menu_sound.stop()  # Stop the start menu sound
+            start_menu_sound.stop()  
             is_frozen = True  # Freeze the character
-            freeze_time = pygame.time.get_ticks()  # Get the current time in milliseconds
-            prologue_sound.play()  # Play the prologue sound
+            freeze_time = pygame.time.get_ticks()  
+            prologue_sound.play()  
             prologue_sound_played = True 
         # Inside the game loop
         if is_frozen:
-            # Check if the 3 minutes have passed (180000 milliseconds)
+            
             if pygame.time.get_ticks() - freeze_time >= 180000:
-                is_frozen = True  # freeze the character after 3 minutes
-                controls_sound.play()  # Play the controls sound clip
+                is_frozen = True 
+                controls_sound.play()  
 
         # In the level loop, make sure to only allow the player to move if not frozen
         if not is_frozen:
@@ -275,7 +274,7 @@ while True:
         if continue_button.draw(screen):
             start_menu = False
             in_level1 = True
-            start_menu_sound.stop()  # Stop the start menu sound
+            start_menu_sound.stop()  
             
         if menu_quit_button.draw(screen):
             pygame.quit()
@@ -295,10 +294,10 @@ while True:
         if player_rect.colliderect(stairs_rect):
             print("Entering next level...")
             fade_out()
-            # Change the background to level 2
-            screen.fill((0, 0, 0))  # Black background for simplicity
+           
+            screen.fill((0, 0, 0))  
             pygame.display.update()
-            pygame.time.wait(1000)  # Wait 1 second for visual transition
+            pygame.time.wait(1000)  
             start_tetris()  # Start the Tetris game
             print("Entering next level...")
             fade_out()
