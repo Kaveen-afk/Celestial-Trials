@@ -11,21 +11,20 @@ def get_dist(pos1, pos2):
 
 def generate_glow(glow, radius, bg_surface):
     """Generates a glow effect with a transparent hole in the dark overlay using the background surface."""
-    # Create a surface with transparency
+    
     surf = pygame.Surface((radius * 2, radius * 2), pygame.SRCALPHA)
-    layers = 15  # Reduced layers for a smaller glow effect
+    layers = 15  
     glow = clamp(glow, 180, 300)
 
-    # Draw glow layers around the center
+    
     for i in range(layers):
         k = clamp(glow - i * 10, 0, 255)
-        pygame.draw.circle(surf, (k, k, k), surf.get_rect().center, radius - i * 2)  # Adjust the step for smaller circles
+        pygame.draw.circle(surf, (k, k, k), surf.get_rect().center, radius - i * 2)  
 
     # Create the transparent hole (use the background surface)
     hole_rect = pygame.Rect(0, 0, radius * 2, radius * 2)
-    hole_surface = bg_surface.subsurface(hole_rect)  # Grab the section of the background where the glow will be
-    surf.blit(hole_surface, (0, 0), special_flags=pygame.BLEND_RGBA_SUB)  # Use the background to create the hole
-
+    hole_surface = bg_surface.subsurface(hole_rect) 
+    surf.blit(hole_surface, (0, 0), special_flags=pygame.BLEND_RGBA_SUB)  
     return surf
 
 class Spot:
